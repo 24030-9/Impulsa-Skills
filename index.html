@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Impulsa Skills | Aprende y conecta</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f7f9fc;color:#263238}
+  header{background:#20b8c9;color:white;padding:22px 7%;position:sticky;top:0;z-index:10;box-shadow:0 2px 10px #0002}
+  .top{display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .brand{font-size:27px;font-weight:800}.tag{font-size:13px;opacity:.9}
+  .xpbox{background:white;color:#167c89;border-radius:14px;padding:10px 16px;font-weight:800;min-width:125px;text-align:center}
+  .progress-wrap{height:9px;background:#dce7eb;border-radius:20px;margin-top:14px;overflow:hidden}
+  #bar{height:100%;width:0;background:#ffca28;transition:.35s}
+  main{max-width:1000px;margin:30px auto;padding:0 20px}
+  .hero{background:white;border-radius:20px;padding:28px;box-shadow:0 4px 18px #0000000c;margin-bottom:25px}
+  h1{margin:0 0 8px;font-size:32px}.hero p{margin:8px 0;line-height:1.5}
+  .levels{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:20px}
+  .level{padding:13px;border-radius:14px;background:#eef5f7;text-align:center;font-size:13px;font-weight:700}
+  .level.active{background:#d8f5f7;border:2px solid #20b8c9}
+  section{background:white;border-radius:20px;padding:25px;margin:22px 0;box-shadow:0 4px 18px #0000000c}
+  .section-head{display:flex;justify-content:space-between;gap:15px;align-items:center}
+  .badge{background:#20b8c9;color:white;padding:7px 12px;border-radius:20px;font-size:12px;font-weight:bold}
+  h2{margin:0 0 8px} h3{margin-top:22px;color:#167c89}
+  .info{background:#f0fbfc;border-left:5px solid #20b8c9;padding:14px;border-radius:8px;line-height:1.5}
+  .question{margin:18px 0;padding:16px;background:#fafafa;border:1px solid #e4e9ec;border-radius:12px}
+  label{display:block;margin:9px 0;cursor:pointer}
+  button{border:0;background:#20b8c9;color:white;padding:12px 20px;border-radius:12px;font-weight:800;cursor:pointer}
+  button:hover{filter:brightness(.95)}
+  .result{font-weight:800;margin-left:10px}.correct{color:#159447}.wrong{color:#c62828}
+  .locked{opacity:.55;pointer-events:none}
+  footer{text-align:center;padding:30px;color:#718096;font-size:13px}
+  @media(max-width:700px){.levels{grid-template-columns:1fr 1fr}.top{align-items:flex-start}.xpbox{min-width:95px}}
+
+  .virtual-card{background:linear-gradient(135deg,#eefbfd,#f7f9fc);border:1px solid #d6eef1}
+  .call-layout{display:grid;grid-template-columns:1.6fr 1fr;gap:18px}
+  .video-window{background:#263238;border-radius:16px;min-height:330px;position:relative;overflow:hidden;padding:18px;color:white}
+  .video-main{height:220px;border-radius:12px;background:#455a64;display:flex;align-items:center;justify-content:center;font-size:58px}
+  .call-label{position:absolute;left:30px;top:30px;background:#0008;padding:7px 11px;border-radius:8px;font-size:12px}
+  .controls{display:flex;justify-content:center;gap:10px;margin-top:15px}
+  .control{width:42px;height:42px;border-radius:50%;background:#607d8b;display:flex;align-items:center;justify-content:center}
+  .control.end{background:#d84b4b}
+  .participants{background:white;border-radius:14px;padding:16px;border:1px solid #e1e8eb}
+  .person{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #edf0f2}
+  .person:last-child{border-bottom:0}
+  .avatar{width:36px;height:36px;border-radius:50%;background:#d8f5f7;display:flex;align-items:center;justify-content:center}
+  .status{margin-left:auto;font-size:12px;color:#159447}
+  .schedule{margin-top:18px;background:white;border-radius:12px;padding:14px;border:1px solid #e1e8eb}
+  @media(max-width:700px){.call-layout{grid-template-columns:1fr}.video-window{min-height:280px}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div><div class="brand">🚀 Impulsa Skills</div><div class="tag">Desarrolla tus habilidades. Conecta con expertos.</div></div>
+    <div class="xpbox">EXP: <span id="xp">0</span> / 100</div>
+  </div>
+  <div class="progress-wrap"><div id="bar"></div></div>
+</header>
+
+<main>
+  <div class="hero">
+    <h1>Ruta para convertirte en un mejor líder</h1>
+    <p>Completa 5 espacios de aprendizaje y conecta en Virtual Knowledge. Lee la información y responde las preguntas. Cada respuesta correcta suma <b>5 EXP</b>.</p>
+    <p><b>Meta:</b> llegar a 100 EXP desarrollando liderazgo, comunicación y otras habilidades blandas.</p>
+    <div class="levels">
+      <div class="level active">1. Liderazgo</div>
+      <div class="level">2. Comunicación</div>
+      <div class="level">3. Equipo</div>
+      <div class="level">4. Inteligencia emocional</div>
+      <div class="level">5. Conflictos</div>
+    </div>
+  </div>
+
+  <section id="s1">
+    <div class="section-head"><div><h2>1. Liderazgo consciente</h2><span class="badge">20 EXP</span></div></div>
+    <h3>Aprende</h3>
+    <div class="info">Un buen líder no solo da instrucciones. Escucha, establece objetivos claros, toma decisiones responsables y ayuda a que otras personas desarrollen su potencial. Liderar implica influir positivamente y asumir responsabilidad por las decisiones del equipo.</div>
+    <form data-section="1">
+      <div class="question"><b>1. ¿Qué caracteriza a un buen líder?</b>
+        <label><input type="radio" name="q1" value="0"> Dar órdenes sin escuchar</label>
+        <label><input type="radio" name="q1" value="1"> Escuchar, orientar y asumir responsabilidades</label>
+        <label><input type="radio" name="q1" value="0"> Hacer todo el trabajo personalmente</label>
+      </div>
+      <div class="question"><b>2. Ante un error del equipo, un líder debería...</b>
+        <label><input type="radio" name="q2" value="1"> Analizar lo ocurrido y buscar una solución con el equipo</label>
+        <label><input type="radio" name="q2" value="0"> Culpar inmediatamente a alguien</label>
+        <label><input type="radio" name="q2" value="0"> Ignorar el problema</label>
+      </div>
+      <div class="question"><b>3. ¿Qué ayuda a generar confianza?</b>
+        <label><input type="radio" name="q3" value="1"> Cumplir compromisos y actuar con coherencia</label>
+        <label><input type="radio" name="q3" value="0"> Cambiar las reglas constantemente</label>
+        <label><input type="radio" name="q3" value="0"> Evitar dar explicaciones</label>
+      </div>
+      <div class="question"><b>4. Una meta efectiva debe ser...</b>
+        <label><input type="radio" name="q4" value="1"> Clara y comprensible para el equipo</label>
+        <label><input type="radio" name="q4" value="0"> Ambigua para permitir cualquier resultado</label>
+        <label><input type="radio" name="q4" value="0"> Conocida solamente por el líder</label>
+      </div>
+      <button type="submit">Comprobar respuestas</button><span class="result"></span>
+    </form>
+  </section>
+
+  <section id="s2">
+    <div class="section-head"><div><h2>2. Comunicación efectiva</h2><span class="badge">20 EXP</span></div></div>
+    <h3>Aprende</h3>
+    <div class="info">La comunicación efectiva consiste en expresar ideas de manera clara y escuchar activamente. Hacer preguntas, confirmar que se entendió el mensaje y adaptar la forma de comunicarte a la situación ayuda a evitar malentendidos.</div>
+    <form data-section="2">
+      <div class="question"><b>1. ¿Qué es la escucha activa?</b>
+        <label><input type="radio" name="q1" value="1"> Prestar atención y tratar de comprender antes de responder</label>
+        <label><input type="radio" name="q1" value="0"> Esperar tu turno para hablar sin atender</label>
+        <label><input type="radio" name="q1" value="0"> Interrumpir para terminar rápido</label>
+      </div>
+      <div class="question"><b>2. Para dar retroalimentación útil conviene...</b>
+        <label><input type="radio" name="q2" value="1"> Ser específico y enfocarse en conductas que pueden mejorar</label>
+        <label><input type="radio" name="q2" value="0"> Atacar la personalidad de la persona</label>
+        <label><input type="radio" name="q2" value="0"> Evitar ejemplos</label>
+      </div>
+      <div class="question"><b>3. Si alguien no entiende una instrucción, lo mejor es...</b>
+        <label><input type="radio" name="q3" value="1"> Explicarla de otra manera y verificar comprensión</label>
+        <label><input type="radio" name="q3" value="0"> Repetirla más rápido</label>
+        <label><input type="radio" name="q3" value="0"> Suponer que no está interesado</label>
+      </div>
+      <div class="question"><b>4. Una comunicación asertiva busca...</b>
+        <label><input type="radio" name="q4" value="1"> Expresar necesidades respetando a los demás</label>
+        <label><input type="radio" name="q4" value="0"> Imponer la opinión propia</label>
+        <label><input type="radio" name="q4" value="0"> Evitar cualquier desacuerdo</label>
+      </div>
+      <button type="submit">Comprobar respuestas</button><span class="result"></span>
+    </form>
+  </section>
+
+  <section id="s3">
+    <div class="section-head"><div><h2>3. Trabajo en equipo</h2><span class="badge">20 EXP</span></div></div>
+    <h3>Aprende</h3>
+    <div class="info">Trabajar en equipo requiere cooperación, respeto por diferentes ideas, distribución de responsabilidades y objetivos compartidos. Un equipo funciona mejor cuando las personas conocen su papel y pueden aportar sus fortalezas.</div>
+    <form data-section="3">
+      <div class="question"><b>1. ¿Qué fortalece un equipo?</b>
+        <label><input type="radio" name="q1" value="1"> Objetivos compartidos y responsabilidades claras</label>
+        <label><input type="radio" name="q1" value="0"> Competencia constante entre integrantes</label>
+        <label><input type="radio" name="q1" value="0"> Que una sola persona decida todo</label>
+      </div>
+      <div class="question"><b>2. Ante una opinión diferente...</b>
+        <label><input type="radio" name="q2" value="1"> Escucharla y evaluar sus argumentos</label>
+        <label><input type="radio" name="q2" value="0"> Rechazarla automáticamente</label>
+        <label><input type="radio" name="q2" value="0"> Ignorar a quien la propone</label>
+      </div>
+      <div class="question"><b>3. Delegar significa...</b>
+        <label><input type="radio" name="q3" value="1"> Asignar responsabilidades adecuadas y dar seguimiento</label>
+        <label><input type="radio" name="q3" value="0"> Desentenderse completamente</label>
+        <label><input type="radio" name="q3" value="0"> Hacer que otros hagan todo</label>
+      </div>
+      <div class="question"><b>4. La diversidad de habilidades puede...</b>
+        <label><input type="radio" name="q4" value="1"> Complementar las fortalezas del equipo</label>
+        <label><input type="radio" name="q4" value="0"> Impedir cualquier colaboración</label>
+        <label><input type="radio" name="q4" value="0"> Hacer innecesaria la comunicación</label>
+      </div>
+      <button type="submit">Comprobar respuestas</button><span class="result"></span>
+    </form>
+  </section>
+
+  <section id="s4">
+    <div class="section-head"><div><h2>4. Inteligencia emocional</h2><span class="badge">20 EXP</span></div></div>
+    <h3>Aprende</h3>
+    <div class="info">La inteligencia emocional incluye reconocer las propias emociones, regular las reacciones y comprender las emociones de otras personas. Estas habilidades ayudan a responder de forma más consciente ante situaciones difíciles.</div>
+    <form data-section="4">
+      <div class="question"><b>1. Antes de responder en una situación tensa conviene...</b>
+        <label><input type="radio" name="q1" value="1"> Hacer una pausa y reconocer lo que estás sintiendo</label>
+        <label><input type="radio" name="q1" value="0"> Responder impulsivamente</label>
+        <label><input type="radio" name="q1" value="0"> Elevar la voz</label>
+      </div>
+      <div class="question"><b>2. La empatía consiste en...</b>
+        <label><input type="radio" name="q2" value="1"> Intentar comprender la perspectiva y emociones de otra persona</label>
+        <label><input type="radio" name="q2" value="0"> Estar siempre de acuerdo</label>
+        <label><input type="radio" name="q2" value="0"> Resolver todos sus problemas</label>
+      </div>
+      <div class="question"><b>3. Reconocer una emoción ayuda a...</b>
+        <label><input type="radio" name="q3" value="1"> Elegir una respuesta más consciente</label>
+        <label><input type="radio" name="q3" value="0"> Evitar pensar en la situación</label>
+        <label><input type="radio" name="q3" value="0"> Hacer que desaparezca inmediatamente</label>
+      </div>
+      <div class="question"><b>4. Una buena autorregulación emocional implica...</b>
+        <label><input type="radio" name="q4" value="1"> Manejar la reacción sin negar la emoción</label>
+        <label><input type="radio" name="q4" value="0"> Nunca sentir emociones negativas</label>
+        <label><input type="radio" name="q4" value="0"> Ocultar siempre lo que sientes</label>
+      </div>
+      <button type="submit">Comprobar respuestas</button><span class="result"></span>
+    </form>
+  </section>
+
+  <section id="s5">
+    <div class="section-head"><div><h2>5. Resolución de conflictos</h2><span class="badge">20 EXP</span></div></div>
+    <h3>Aprende</h3>
+    <div class="info">Los conflictos pueden surgir por diferencias de intereses, expectativas o formas de trabajar. Resolverlos de manera constructiva implica identificar el problema, escuchar a las partes, buscar opciones y acordar acciones concretas.</div>
+    <form data-section="5">
+      <div class="question"><b>1. El primer paso ante un conflicto es...</b>
+        <label><input type="radio" name="q1" value="1"> Comprender qué ocurrió y cuáles son las necesidades involucradas</label>
+        <label><input type="radio" name="q1" value="0"> Buscar inmediatamente un culpable</label>
+        <label><input type="radio" name="q1" value="0"> Ignorar el problema</label>
+      </div>
+      <div class="question"><b>2. Una solución colaborativa busca...</b>
+        <label><input type="radio" name="q2" value="1"> Considerar las necesidades de las partes y encontrar alternativas</label>
+        <label><input type="radio" name="q2" value="0"> Que una persona gane y otra pierda</label>
+        <label><input type="radio" name="q2" value="0"> Evitar hablar del problema</label>
+      </div>
+      <div class="question"><b>3. ¿Qué ayuda a reducir un malentendido?</b>
+        <label><input type="radio" name="q3" value="1"> Preguntar, escuchar y aclarar supuestos</label>
+        <label><input type="radio" name="q3" value="0"> Hacer suposiciones</label>
+        <label><input type="radio" name="q3" value="0"> Hablar por la otra persona</label>
+      </div>
+      <div class="question"><b>4. Después de acordar una solución es recomendable...</b>
+        <label><input type="radio" name="q4" value="1"> Definir acciones y dar seguimiento</label>
+        <label><input type="radio" name="q4" value="0"> Dar el conflicto por olvidado</label>
+        <label><input type="radio" name="q4" value="0"> No aclarar responsabilidades</label>
+      </div>
+      <button type="submit">Comprobar respuestas</button><span class="result"></span>
+    </form>
+  </section>
+
+  <div class="hero" id="final" style="display:none;text-align:center">
+    <h2>🏆 ¡Completaste LíderLab!</h2>
+    <p>Alcanzaste <b>100 EXP</b>. Ya recorriste los cinco módulos de habilidades blandas.</p>
+  </div>
+
+  <section class="virtual-card" id="virtual-knowledge">
+    <div class="section-head">
+      <div>
+        <h2>💻 Virtual Knowledge</h2>
+        <p style="margin:4px 0 0">Videollamadas para aprender directamente de personas con experiencia.</p>
+      </div>
+      <span class="badge">NUEVO</span>
+    </div>
+
+    <h3>Aprende en vivo</h3>
+    <div class="info">
+      <b>Virtual Knowledge</b> conecta a los jóvenes con profesionales, estudiantes universitarios
+      y especialistas mediante sesiones virtuales. El objetivo es complementar los talleres y
+      convertir el aprendizaje en una experiencia práctica e interactiva.
+    </div>
+
+    <div class="call-layout" style="margin-top:18px">
+      <div class="video-window">
+        <div class="call-label">🔴 Virtual Knowledge • Sesión en vivo</div>
+        <div class="video-main">👩‍🏫</div>
+        <div style="text-align:center;margin-top:8px;font-weight:700">Mentora de liderazgo</div>
+        <div class="controls">
+          <div class="control">🎤</div>
+          <div class="control">📹</div>
+          <div class="control">💬</div>
+          <div class="control end">☎</div>
+        </div>
+      </div>
+
+      <div class="participants">
+        <h3 style="margin-top:0">Participantes</h3>
+        <div class="person"><div class="avatar">👩</div><div>Mentora</div><span class="status">● En vivo</span></div>
+        <div class="person"><div class="avatar">👨</div><div>Alex</div><span class="status">● Conectado</span></div>
+        <div class="person"><div class="avatar">👩</div><div>Sofía</div><span class="status">● Conectada</span></div>
+        <div class="person"><div class="avatar">👨</div><div>Diego</div><span class="status">● Conectado</span></div>
+        <div class="schedule">
+          <b>📅 Próxima sesión</b>
+          <p style="margin:7px 0 0">“Cómo comunicarte con confianza”</p>
+          <small>Jueves · 17:00 h · 45 minutos</small>
+        </div>
+      </div>
+    </div>
+
+    <button style="margin-top:18px" onclick="alert('Esta es una simulación del prototipo. La sesión real se realizaría mediante una plataforma de videollamadas.')">
+      Unirme a Virtual Knowledge
+    </button>
+  </section>
+
+</main>
+<footer>Prototipo educativo para el desarrollo de liderazgo, habilidades blandas y aprendizaje virtual.</footer>
+
+<script>
+let xp = Number(localStorage.getItem("liderlab_xp") || 0);
+const completed = JSON.parse(localStorage.getItem("liderlab_completed") || "{}");
+document.querySelectorAll("form").forEach(form => {
+  const section = form.dataset.section;
+  if(completed[section]) {
+    form.querySelectorAll("input").forEach(i=>i.disabled=true);
+    form.querySelector("button").disabled=true;
+    form.querySelector(".result").textContent=" ✓ Completado";
+    form.querySelector(".result").className="result correct";
+  }
+  form.addEventListener("submit", e=>{
+    e.preventDefault();
+    if(completed[section]) return;
+    let score=0;
+    for(let i=1;i<=4;i++){
+      const answer=form.querySelector(`input[name="q${i}"]:checked`);
+      if(answer && answer.value==="1") score++;
+    }
+    const gained=score*5;
+    xp=Math.min(100,xp+gained);
+    completed[section]=true;
+    localStorage.setItem("liderlab_xp",xp);
+    localStorage.setItem("liderlab_completed",JSON.stringify(completed));
+    form.querySelector(".result").textContent=` +${gained} EXP — ${score}/4 correctas`;
+    form.querySelector(".result").className="result "+(score>=3?"correct":"wrong");
+    form.querySelectorAll("input").forEach(i=>i.disabled=true);
+    form.querySelector("button").disabled=true;
+    update();
+  });
+});
+function update(){
+  document.getElementById("xp").textContent=xp;
+  document.getElementById("bar").style.width=xp+"%";
+  if(xp>=100) document.getElementById("final").style.display="block";
+}
+update();
+</script>
+</body>
+</html>
